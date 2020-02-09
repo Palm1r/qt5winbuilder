@@ -12,11 +12,15 @@ echo Bits: %BIT%
 
 IF %COMPILER%==msys2 (
   @echo on
-  cd qt5
   
   SET "PATH=C:\%MSYS2_DIR%\%MSYSTEM%\bin;C:\%MSYS2_DIR%\usr\bin;%PATH%"
   SET OPENSSL_LIBS='-LC:\%MSYS2_DIR%\%MSYSTEM%\lib -llibssl -llibcrypto'
   SET _ROOT=%APPVEYOR_BUILD_FOLDER%\qt5
+  cd _ROOT
+  
+  echo %CD%
+  echo %PATH%
+  echo %_ROOT%
   
   mkdir qtbuild
   cd %CD%\qtbuild
