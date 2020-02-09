@@ -17,6 +17,7 @@ IF %COMPILER%==msys2 (
   bash -lc "pacman -S --needed --noconfirm git"
   bash -lc "pacman -S --needed --noconfirm mingw-w64-x86_64-gcc"
   bash -lc "pacman -S --needed --noconfirm mingw-w64-x86_64-toolchain mingw-w64-x86_64-make"
+  bash -lc "pacman -S --needed --noconfirm openssl"
   
   git clone git://code.qt.io/qt/qt5.git
   cd %CD%\qt5
