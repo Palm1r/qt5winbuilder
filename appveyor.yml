@@ -15,6 +15,10 @@ environment:
       MSYSTEM: MINGW64
       BIT: 64
       BUILDTOOL: autoconf
+      
+clone_script:
+    git checkout -t origin/5.14.1
+    git submodule update --init --recursive
     
 install:
     - set
