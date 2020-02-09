@@ -1,8 +1,5 @@
 @echo off
 
-echo %APPVEYOR_BUILD_FOLDER%
-REM git submodule update --init --recursive
-
 cd %APPVEYOR_BUILD_FOLDER%
 
 echo Compiler: %COMPILER%
