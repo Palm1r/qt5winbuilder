@@ -18,16 +18,10 @@ IF %COMPILER%==msys2 (
   bash -lc "pacman -S --needed --noconfirm mingw-w64-x86_64-gcc"
   bash -lc "pacman -S --needed --noconfirm mingw-w64-x86_64-toolchain mingw-w64-x86_64-make"
   bash -lc "pacman -S --needed --noconfirm openssl"
+  bash -lc "pacman -S --needed --noconfirm perl ruby python python2"
   
   git clone git://code.qt.io/qt/qt5.git
   cd %CD%\qt5
   git checkout -t origin/5.14.1
   git submodule update --init --recursive
-  
-  SET OPENSSL_LIBS='-LC:\%MSYS2_DIR%\%MSYSTEM%\lib -llibssl -llibcrypto'
-  
-  mkdir qtbuild
-  cd %CD%\qtbuild
-  
-  %APPVEYOR_BUILD_FOLDER%\qt5\configure -prefix  -opensource -confirm-license -platform win32-g++ -c++std c++1z -release -shared -strip -opengl desktop -openssl-linked -no-icu -no-iconv -no-angle -no-dbus -nomake tools -nomake examples -nomake tests -skip qtwebengine -skip qtmultimedia -qt-zlib -qt-libpng -qt-libjpeg
 )
