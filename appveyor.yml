@@ -17,7 +17,7 @@ environment:
       BUILDTOOL: autoconf
       
 clone_script:
-    - cmd: >-
+    - cmd:
       git clone -q --branch=master https://github.com/ArtifeksNN/qt5winbuilder.git C:\projects\qt5winbuilder
       git checkout -qf %APPVEYOR_REPO_COMMIT%
       git submodule init
