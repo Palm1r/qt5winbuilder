@@ -23,4 +23,11 @@ IF %COMPILER%==msys2 (
   cd %CD%\qt5
   git checkout -t origin/5.14.1
   git submodule update --init --recursive
+  
+  SET OPENSSL_LIBS='-LC:\%MSYS2_DIR%\%MSYSTEM%\lib -llibssl -llibcrypto'
+  
+  mkdir qtbuild
+  cd %CD%\qtbuild
+  
+  ..\configure -prefix  -opensource -confirm-license -platform win32-g++ -c++std c++1z -release -shared -strip -opengl desktop -openssl-linked -no-icu -no-iconv -no-angle -no-dbus -nomake tools -nomake examples -nomake tests -skip qtwebengine -skip qtmultimedia -qt-zlib -qt-libpng -qt-libjpeg
 )
