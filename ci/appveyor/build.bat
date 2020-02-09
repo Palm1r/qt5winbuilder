@@ -12,11 +12,14 @@ echo Bits: %BIT%
 
 IF %COMPILER%==msys2 (
   @echo on
+  cd qt5
+  
   SET "PATH=C:\%MSYS2_DIR%\%MSYSTEM%\bin;C:\%MSYS2_DIR%\usr\bin;%PATH%"
   SET OPENSSL_LIBS='-LC:\%MSYS2_DIR%\%MSYSTEM%\lib -llibssl -llibcrypto'
+  SET _ROOT=%APPVEYOR_BUILD_FOLDER%\qt5
   
   mkdir qtbuild
   cd %CD%\qtbuild
   
-  ..\configure -prefix C:\Qt\5.13.0 -opensource -confirm-license -platform win32-g++ -c++std c++1z -release -shared -strip -opengl desktop -openssl-linked -no-icu -no-iconv -no-angle -no-dbus -nomake tools -nomake examples -nomake tests -skip qtwebengine -skip qtmultimedia -qt-zlib -qt-libpng -qt-libjpeg
+  ..\configure -prefix  -opensource -confirm-license -platform win32-g++ -c++std c++1z -release -shared -strip -opengl desktop -openssl-linked -no-icu -no-iconv -no-angle -no-dbus -nomake tools -nomake examples -nomake tests -skip qtwebengine -skip qtmultimedia -qt-zlib -qt-libpng -qt-libjpeg
 )
