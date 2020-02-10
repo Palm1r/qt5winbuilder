@@ -45,8 +45,9 @@ env:
     - MAKEFLAGS="-j 2"
     
 script:
-    md qtbuild
-    cd qtbuild
-    
-    ..\qt5\configure -prefix %CD%\qtbase -opensource -confirm-license -platform win32-g++ -c++std c++1z -release -shared -strip -opengl desktop -openssl-linked -no-icu -no-iconv -no-angle -no-dbus -nomake tools -nomake examples -nomake tests -skip qtwebengine -skip qtmultimedia -qt-zlib -qt-libpng -qt-libjpeg
+    - set PATH=C:/tools/msys64/bin;C:/tools/msys64/usr/bin;%PATH%
+    - set OPENSSL_LIBS='-LC:/tools/msys64/lib -llibssl -llibcrypto'
+    - mkdir qtbuild    
+    - cd qtbuild
+    - ..\qt5\configure -prefix %CD%\qtbase -opensource -confirm-license -platform win32-g++ -c++std c++1z -release -shared -strip -opengl desktop -openssl-linked -no-icu -no-iconv -no-angle -no-dbus -nomake tools -nomake examples -nomake tests -skip qtwebengine -skip qtmultimedia -qt-zlib -qt-libpng -qt-libjpeg
     mingw32-make -j2
