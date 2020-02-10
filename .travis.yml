@@ -1,5 +1,5 @@
 os: windows
-language: C++
+language: bash
 branches:
   only:
   - master
