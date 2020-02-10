@@ -39,3 +39,14 @@ cache:
     directories:
     - $HOME/AppData/Local/Temp/chocolatey
     - /C/tools/msys64
+    
+env:
+  global:
+    - MAKEFLAGS="-j 2"
+    
+script:
+    md qtbuild
+    cd qtbuild
+    
+    ..\qt5\configure -prefix %CD%\qtbase -opensource -confirm-license -platform win32-g++ -c++std c++1z -release -shared -strip -opengl desktop -openssl-linked -no-icu -no-iconv -no-angle -no-dbus -nomake tools -nomake examples -nomake tests -skip qtwebengine -skip qtmultimedia -qt-zlib -qt-libpng -qt-libjpeg
+    mingw32-make -j2
