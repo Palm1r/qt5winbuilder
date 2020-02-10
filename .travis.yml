@@ -50,5 +50,5 @@ script:
     - set OPENSSL_LIBS='-LC:\tools\msys64\lib -llibssl -llibcrypto'
     - mkdir qtbuild    
     - cd qtbuild
-    - %TRAVIS_BUILD_DIR%\qt5\configure -prefix %CD%/qtbase -opensource -confirm-license -platform win32-g++ -c++std c++1z -release -shared -strip -opengl desktop -openssl-linked -no-icu -no-iconv -no-angle -no-dbus -nomake tools -nomake examples -nomake tests -skip qtwebengine -skip qtmultimedia -qt-zlib -qt-libpng -qt-libjpeg
+    - TRAVIS_BUILD_DIR\qt5\configure -prefix %CD%/qtbase -opensource -confirm-license -platform win32-g++ -c++std c++1z -release -shared -strip -opengl desktop -openssl-linked -no-icu -no-iconv -no-angle -no-dbus -nomake tools -nomake examples -nomake tests -skip qtwebengine -skip qtmultimedia -qt-zlib -qt-libpng -qt-libjpeg
     - mingw32-make -j2
