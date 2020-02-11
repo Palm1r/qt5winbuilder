@@ -37,9 +37,9 @@ before_cache:
         ;;
     esac
 install:
-    git clone git://code.qt.io/qt/qt5.git
-    cd qt5
-    git checkout origin/5.14.1
+    - git clone git://code.qt.io/qt/qt5.git
+    - cd qt5
+    - git checkout origin/5.14.1
     
 cache:
     directories:
