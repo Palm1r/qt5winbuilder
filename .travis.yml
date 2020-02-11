@@ -1,5 +1,7 @@
 os: windows
+
 language: C++
+
 branches:
   only:
   - master
@@ -34,7 +36,10 @@ before_cache:
         $msys2 pacman --sync --clean --noconfirm
         ;;
     esac
-
+install:
+    - git clone git://code.qt.io/qt/qt5.git
+    - cd qt5
+    - git checkout origin/5.14.1
 cache:
     directories:
     - $HOME/AppData/Local/Temp/chocolatey
