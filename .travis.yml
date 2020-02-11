@@ -16,6 +16,7 @@ before_cache:
 cache:
     directories:
     - $HOME/AppData/Local/Temp/chocolatey
+    - $HOME/qt5winbuilder/qt5/
     
 env:
   global:
