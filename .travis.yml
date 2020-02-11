@@ -9,6 +9,12 @@ branches:
 instal:
   
 before_install:
+  - git clone https://code.qt.io/qt/qt5.git
+  - cd qt5/
+  - git checkout origin/5.14.1
+  - git submodule init --recursive
+  - git submodule update
+  
 before_cache:
 
 cache:
@@ -20,7 +26,3 @@ env:
   global:
     - MAKEFLAGS="-j 2"
 script:
-  - git clone https://github.com/qt/qt5.git
-  - cd qt5/
-  - git checkout origin/5.14.1
-  - git submodule update --init --recursive
