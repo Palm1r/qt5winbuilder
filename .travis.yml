@@ -6,12 +6,14 @@ branches:
   only:
   - master
   
-before_install:
-before_cache:
+instal:
   - git clone https://github.com/qt/qt5.git
   - cd qt5/
   - git checkout origin/5.14.1
   - git submodule update --init --recursive
+  
+before_install:
+before_cache:
 
 cache:
     directories:
