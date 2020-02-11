@@ -1,6 +1,6 @@
 os: windows
 
-language: bash
+language: shell
 
 branches:
   only:
@@ -16,14 +16,46 @@ before_install:
   - git submodule update
   - git submodule update --init --recursive
   
+  - |-
+    case $TRAVIS_OS_NAME in
+      windows)
+        [[ ! -f C:/tools/msys64/msys2_shell.cmd ]] && rm -rf C:/tools/msys64
+        choco uninstall -y mingw
+        choco upgrade --no-progress -y msys2
+        export msys2='cmd //C RefreshEnv.cmd '
+        export msys2+='& set MSYS=winsymlinks:nativestrict '
+        export msys2+='& C:\\tools\\msys64\\msys2_shell.cmd -defterm -no-start'
+        export mingw64="$msys2 -mingw64 -full-path -here -c "\"\$@"\" --"
+        export msys2+=" -msys2 -c "\"\$@"\" --"
+        $msys2 pacman --sync --noconfirm --needed mingw-w64-x86_64-toolchain mingw-w64-x86_64-make
+        $msys2 pacman perl ruby python python2 openssl
+        $msys2 pacman mingw-w64-x86_64-gcc
+        ## Install more MSYS2 packages from https://packages.msys2.org/base here
+        taskkill //IM gpg-agent.exe //F  # https://travis-ci.community/t/4967
+        export PATH=/C/tools/msys64/mingw64/bin:$PATH
+        export MAKE=mingw32-make  # so that Autotools can find it
+        ;;
+    esac
 before_cache:
-
+- |-
+    case $TRAVIS_OS_NAME in
+      windows)
+        # https://unix.stackexchange.com/a/137322/107554
+        $msys2 pacman --sync --clean --noconfirm
+        ;;
+    esac
 cache:
     directories:
     - $HOME/AppData/Local/Temp/chocolatey
     - $HOME/qt5winbuilder/qt5/
-    
+    - /C/tools/msys64
 env:
   global:
     - MAKEFLAGS="-j 2"
 script:
+    - echo ${PATH}
+    - set OPENSSL_LIBS='-LC:/tools/msys64/lib -llibssl -llibcrypto'
+    - mkdir qtbuild    
+    - cd qtbuild
+    - ${TRAVIS_BUILD_DIR}/qt5/configure -prefix %CD%/qtbase -opensource -confirm-license -platform win32-g++ -c++std c++1z -release -shared -strip -opengl desktop -openssl-linked -no-icu -no-iconv -no-angle -no-dbus -nomake tools -nomake examples -nomake tests -skip qtwebengine -skip qtmultimedia -qt-zlib -qt-libpng -qt-libjpeg
+    - mingw32-make -j2
