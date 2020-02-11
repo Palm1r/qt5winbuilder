@@ -7,12 +7,12 @@ branches:
   - master
   
 before_install:
+before_cache:
   - git clone https://github.com/qt/qt5.git
   - cd qt5/
   - git checkout origin/5.14.1
   - git submodule update --init --recursive
 
-before_cache:
 cache:
     directories:
     - $HOME/AppData/Local/Temp/chocolatey
