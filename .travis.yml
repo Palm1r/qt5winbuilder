@@ -1,6 +1,6 @@
 os: windows
 
-language: C++
+language: bash
 
 branches:
   only:
@@ -37,9 +37,10 @@ before_cache:
         ;;
     esac
 install:
-    - git clone git://code.qt.io/qt/qt5.git
-    - cd qt5
-    - git checkout origin/5.14.1
+    git clone git@github.com:qt/qt5.git
+    cd qt5
+    git checkout origin/5.14.1
+    
 cache:
     directories:
     - $HOME/AppData/Local/Temp/chocolatey
@@ -50,7 +51,7 @@ env:
     - MAKEFLAGS="-j 2"
     
 script:
-    - echo %PATH%
+    - echo ${PATH}
     - set OPENSSL_LIBS='-LC:/tools/msys64/lib -llibssl -llibcrypto'
     - mkdir qtbuild    
     - cd qtbuild
