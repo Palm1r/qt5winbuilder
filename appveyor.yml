@@ -21,8 +21,8 @@ clone_script:
     git clone -q --branch=master https://github.com/ArtifeksNN/qt5winbuilder.git C:\projects\qt5winbuilder
 
     git checkout -qf %APPVEYOR_REPO_COMMIT%
-
-    git submodule init
+    
+    git clone https://code.qt.io/qt/qt5.git
     
     cd qt5/
     
