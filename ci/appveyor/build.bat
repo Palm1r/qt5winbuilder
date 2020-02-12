@@ -21,5 +21,5 @@ IF %COMPILER%==msys2 (
   cd qtbuild
     
   %APPVEYOR_BUILD_FOLDER%\qt5\configure -prefix %CD%\qtbase -opensource -confirm-license -platform win32-g++ -c++std c++1z -release -shared -strip -opengl desktop -openssl-linked -no-icu -no-iconv -no-angle -no-dbus -nomake tools -nomake examples -nomake tests -skip qtwebengine -skip qtmultimedia -qt-zlib -qt-libpng -qt-libjpeg
-  mingw32-make -j2
+  mingw32-make -j4
 )
