@@ -28,7 +28,7 @@ before_install:
         export mingw64="$msys2 -mingw64 -full-path -here -c "\"\$@"\" --"
         export msys2+=" -msys2 -c "\"\$@"\" --"
         $msys2 pacman --sync --noconfirm --needed mingw-w64-x86_64-toolchain mingw-w64-x86_64-make
-        $msys2 pacman perl ruby python python2 openssl
+        $msys2 pacman perl ruby python openssl
         $msys2 pacman mingw-w64-x86_64-gcc
         ## Install more MSYS2 packages from https://packages.msys2.org/base here
         taskkill //IM gpg-agent.exe //F  # https://travis-ci.community/t/4967
